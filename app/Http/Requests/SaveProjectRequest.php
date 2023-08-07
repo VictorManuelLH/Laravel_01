@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class SaveProjectRequest extends FormRequest
@@ -18,12 +19,25 @@ class SaveProjectRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
      */
-    public function rules(): array
-    {
+    public function rules(): array{
         return [
             'title' => 'required',
-            'url' => 'required',
+            'url' => [
+                'required',
+                Rule::unique('projects') -> ignore( $this -> route('project') )
+            ],
+            'image' => [
+                $this -> route('project') ? 'nullable' : 'required',
+                'mimes:jpeg,png'
+            ], //jpeg, png, bmp, gif, svg, webp
             'description' => 'required',
+        ];
+    }
+
+    public function message(): array
+    {
+        return [
+            'title.required' => 'The project needs a title',
         ];
     }
 }
