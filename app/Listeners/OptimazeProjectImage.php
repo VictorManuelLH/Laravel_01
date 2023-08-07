@@ -8,8 +8,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 
-class OptimazeProjectImage
-{
+class OptimazeProjectImage implements ShouldQueue{
     /**
      * Create the event listener.
      */
@@ -20,7 +19,7 @@ class OptimazeProjectImage
     /**
      * Handle the event.
      */
-    public function handle(ProjectSaved $event){
+    public function handle(ProjectSaved $event) {
         $img = Image::make(Storage::get( $event -> project -> image ))
             -> widen(600)
             -> limitColors(255)
