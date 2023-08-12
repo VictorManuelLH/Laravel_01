@@ -10,6 +10,21 @@
         @endif
     </div>
 </div>
+
+<div class="form-group">
+    <label for="category_id">Category of the project</label>
+    <select name="category_id" id="category_id" class="form-control bg-light shadow-sm  border-0" >
+        <option value="">Selection</option>
+        @foreach ($categories as $id => $name)
+            <option value="{{ $id }}"
+                @if ($id == old('category_id', $project -> category_id))
+                    selected
+                @endif
+                >{{ $name }}</option>
+        @endforeach
+    </select>
+</div>
+
 <div class="form-group">
     <label for="title">Title: </label>
     <input class="form-control bg-light shadow-sm  @error('title') is-invalid @else border-0 @enderror" type="text" id="title" name="title"placeholder="Title:" value="{{ old('title', $project -> title) }}" >
