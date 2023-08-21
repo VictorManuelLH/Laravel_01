@@ -14,9 +14,9 @@
             <h1 class="display-4 mb-0" >Porfolio</h1>
             @endisset
 
-            @auth
+            @can('create', $newProject)
                 <a class="btn btn-primary" href="{{ route('projects.create') }}">Create project</a>
-            @endauth
+            @endcan
         </div>
         <p class="lead text-secondary">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
         <div class="row row-cols-4">

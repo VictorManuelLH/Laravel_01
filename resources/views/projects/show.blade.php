@@ -22,12 +22,16 @@
                 <a href="{{ route('projects.index') }}">Back</a>
                 @auth
                 <div class="btn-group btn-group-sm">
+                    @can('update', $project)
                     <a class="btn btn-primary" href="{{ route('projects.edit', $project) }}">Edit project</a>
+                    @endcan
+                    @can('delete', $project)
                     <a class="btn btn-danger" href="#" onclick="document.getElementById('delete-project').submit()">Delete</a>
                     <form id="delete-project" action="{{ route('projects.destroy', $project) }}" method="POST">
                         @csrf
                         @method('DELETE')
                     </form>
+                    @endcan
                 </div>
                 @endauth
             </div>
