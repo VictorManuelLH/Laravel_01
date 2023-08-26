@@ -9,9 +9,11 @@
     <title>@yield('title', 'Pagina')</title>
     <link rel="stylesheet" href="../sass/app.scss">
     <script src="../js/app.js" defer ></script>
-    <link rel="stylesheet" href="{{ asset('../sass/app.scss') }}">
+
+    {{-- Produccion --}}
+    <link rel="stylesheet" href="//laravel01-production.up.railway.app/sass/app.scss">
     <script src="{{ asset('../js/app.js') }}"></script>
-    {{-- @vite(['../sass/app.scss', '../js/app.js']) --}}
+
     {{-- Desarrollo --}}
     {{-- @vite(['../../../resources/sass/app.scss', '../../../resources/js/app.js']) --}}
 </head>
