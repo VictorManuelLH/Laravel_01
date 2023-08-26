@@ -9,7 +9,9 @@
     <title>@yield('title', 'Pagina')</title>
     <link rel="stylesheet" href="../sass/app.scss">
     <script src="../js/app.js" defer ></script>
-    @vite(['../../../resources/sass/app.scss', '../../../resources/js/app.js'])
+    @vite(['../sass/app.scss', '../js/app.js'])
+    {{-- Desarrollo --}}
+    {{-- @vite(['../../../resources/sass/app.scss', '../../../resources/js/app.js']) --}}
 </head>
 <body>
     <div id="id" class="d-flex flex-column h-screen justify-content-between">
