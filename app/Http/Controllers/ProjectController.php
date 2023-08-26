@@ -20,7 +20,8 @@ class ProjectController extends Controller {
     public function index(){
         return view('projects.index', [
             'newProject' => new Project,
-            'projects' => Project::with('category') -> latest() -> paginate()
+            'projects' => Project::with('category') -> latest() -> paginate(),
+            'deletedProjects' => Project::onlyTrashed() -> get()
         ]);
     }
 
@@ -85,10 +86,26 @@ class ProjectController extends Controller {
 
     //* Metodo destroy
     public function destroy(Project $project){
-        $this -> authorize('delte', $project);
-        Storage::delete($project -> image);
+        $this -> authorize('delete', $project);
         $project -> delete();
         return redirect() -> route('projects.index') -> with('status', 'The project was deleted successfully');
+    }
+
+    //* Metodo restore
+    public function restore($projectUrl){
+        $project = Project::withTrashed() -> whereurl($projectUrl) -> firstOrFail();
+        $this -> authorize('restore', $project);
+        $project -> restore();
+        return redirect() -> route('projects.index') -> with('status', 'The project was restored successfully');
+    }
+
+    //* Metodo forceDelete
+    public function forceDelete($projectUrl){
+        $project = Project::withTrashed() -> whereurl($projectUrl) -> firstOrFail();
+        $this -> authorize('forceDelete', $project);
+        Storage::delete($project -> image);
+        $project -> foreceDelete();
+        return redirect() -> route('projects.index') -> with('status', 'The project was deleted permanently');
     }
 
 }

@@ -46,5 +46,27 @@
                 {{ $projects -> links() }}
             </div>
         </div>
+        @can('view-deleted-projects')
+        <h4 class="mt-5">Paper bin</h4>
+        <ul class="list-group">
+            @foreach ($deletedProjects as $deletedProject)
+            <li class="list-group-item">
+                {{ $deletedProject -> title }}
+                @can('restore', $deletedProject)
+                <form method="POST" class="d-inline" action="{{ route('projects.restore', $deletedProject) }}">
+                    @csrf @method('PATCH')
+                    <button class="btn btn-sm btn-info" >Restore</button>
+                </form>
+                @endcan
+                @can('forceDelete', $deletedProject)
+                <form method="POST" onsubmit="return confirm('This action cannot be undone, are you sure to delete the project permanently?')" class="d-inline" action="{{ route('projects.forceDelete', $deletedProject) }}">
+                    @csrf @method('DELETE')
+                    <button class="btn btn-sm btn-danger" >Delete permanently</button>
+                </form>
+                @endcan
+            </li>
+            @endforeach
+        </ul>
+        @endcan
     </div>
 @endsection

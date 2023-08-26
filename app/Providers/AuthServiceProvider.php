@@ -20,6 +20,8 @@ class AuthServiceProvider extends ServiceProvider
      * Register any authentication / authorization services.
      */
     public function boot(): void{
-        // Gate::define('create-projects', 'App\Policies\ProjectPolicy@create');
+        Gate::define('view-deleted-projects', function($user){
+            return $user -> role === 'admin';
+        });
     }
 }
