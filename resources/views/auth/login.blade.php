@@ -63,6 +63,7 @@
                                     </a>
                                 @endif
                             </div>
+                            <a class="btn btn-outline" href="{{ route('register') }}">Sign up</a>
                         </div>
                     </form>
                 </div>
