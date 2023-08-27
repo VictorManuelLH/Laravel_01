@@ -11,7 +11,7 @@
     <script src="../js/app.js" defer ></script>
 
     {{-- Produccion --}}
-    <link rel="stylesheet" href="/sass/app.scss">
+    <link rel="stylesheet" href="http://laravel01-production.up.railway.app/sass/app.scss">
     <script src="{{ asset('../js/app.js') }}"></script>
 
     {{-- Desarrollo --}}
