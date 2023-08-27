@@ -11,11 +11,11 @@
     <script src="../js/app.js" defer ></script>
 
     {{-- Produccion --}}
-    <link rel="stylesheet" href="http://laravel01-production.up.railway.app/sass/app.scss">
-    <script src="{{ asset('../js/app.js') }}"></script>
+    {{-- <link rel="stylesheet" href="http://laravel01-production.up.railway.app/sass/app.scss"> --}}
+    {{-- <script src="{{ asset('../js/app.js') }}"></script> --}}
 
     {{-- Desarrollo --}}
-    {{-- @vite(['../../../resources/sass/app.scss', '../../../resources/js/app.js']) --}}
+    @vite(['../../../resources/sass/app.scss', '../../../resources/js/app.js'])
 </head>
 <body>
     <div id="id" class="d-flex flex-column h-screen justify-content-between">

@@ -13,10 +13,11 @@ App::setLocale('en');
 Route::view('/', 'home') -> name('home');
 Route::view('/about', 'about') -> name('about');
 
-Route::resource('portfolio', ProjectController::class) -> names('projects') -> parameters(['portfolio' => 'project']);
+Route::get('paperbin', [ProjectController::class, 'index_paperbin']) -> name('paperbin');
+Route::resource('portfolio', ProjectController::class)->names('projects')->parameters(['portfolio' => 'project']);
 
-Route::patch('portfolio/{project}/restore', [ProjectController::class, 'restore'])->name('projects.restore');
-Route::delete('portfolio/{project}/forceDelete', [ProjectController::class, 'forceDelete']) -> name('projects.forceDelete');
+Route::patch('paperbin/{project}/restore', [ProjectController::class, 'restore'])->name('projects.restore');
+Route::delete('paperbin/{project}/forceDelete', [ProjectController::class, 'forceDelete']) -> name('projects.forceDelete');
 
 Route::get('categorias/{category}', [CategoryController::class, 'show']) -> name('categories.show');
 

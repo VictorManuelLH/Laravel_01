@@ -18,10 +18,21 @@ class ProjectController extends Controller {
 
     //* Metodo index
     public function index(){
+        // $userCanCreate = auth()->user()->can('create', Project::class);
         return view('projects.index', [
             'newProject' => new Project,
             'projects' => Project::with('category') -> latest() -> paginate(),
-            'deletedProjects' => Project::onlyTrashed() -> get()
+            'deletedProjects' => Project::onlyTrashed() -> get(),
+            // 'userCanCreate' => $userCanCreate
+        ]);
+    }
+
+    //* Metodo para la paperlera
+    public function index_paperbin(){
+        return view('projects.paperbin', [
+            'newProject' => new Project,
+            'projects' => Project::with('category') -> latest() -> paginate(),
+            'deletedProjects' => Project::onlyTrashed() -> get(),
         ]);
     }
 
@@ -32,9 +43,11 @@ class ProjectController extends Controller {
         ]);
     }
 
+
     //* Metodo create
     public function create(Project $project){
-        $this -> authorize('create', $project = new Project);
+        $project = new Project;
+        $this->authorize('create', $project);
         return view('projects.create', [
             'project' => $project,
             'categories' => Category::pluck('name', 'id')
@@ -96,7 +109,7 @@ class ProjectController extends Controller {
         $project = Project::withTrashed() -> whereurl($projectUrl) -> firstOrFail();
         $this -> authorize('restore', $project);
         $project -> restore();
-        return redirect() -> route('projects.index') -> with('status', 'The project was restored successfully');
+        return redirect() -> route('paperbin') -> with('status', 'The project was restored successfully');
     }
 
     //* Metodo forceDelete
@@ -104,8 +117,8 @@ class ProjectController extends Controller {
         $project = Project::withTrashed() -> whereurl($projectUrl) -> firstOrFail();
         $this -> authorize('forceDelete', $project);
         Storage::delete($project -> image);
-        $project -> foreceDelete();
-        return redirect() -> route('projects.index') -> with('status', 'The project was deleted permanently');
+        $project -> forceDelete();
+        return redirect() -> route('paperbin') -> with('status', 'The project was deleted permanently');
     }
 
 }

@@ -10,6 +10,7 @@
                 <li class="nav-item nav-pills" ><a class="nav-link {{ setActive( 'about' ) }}" href="{{ route('about') }}">{{ __('About') }}</a></li>
                 <li class="nav-item nav-pills" ><a class="nav-link {{ setActive( 'projects.index' ) }}" href="{{ route('projects.index') }}">{{ __('Projects') }}</a></li>
                 <li class="nav-item nav-pills" ><a class="nav-link {{ setActive( 'contact' ) }}" href="{{ route('contact') }}">{{ __('Contact') }}</a></li>
+                <li class="nav-item nav-pills" ><a class="nav-link {{ setActive( 'paperbin' ) }}" href="{{ route('paperbin') }}">{{ __('Paper Bin') }}</a></li>
                 @guest
                 <li class="nav-item nav-pills"><a class="nav-link {{ setActive( 'login' ) }}" href="{{ route('login') }}">{{ __('Login') }}</a></li>
                 @else
